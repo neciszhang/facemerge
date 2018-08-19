@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>face-test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <h1 class="title1">
+        1.上传人脸模板位置
+    </h1>
+    <div class="toFile">
+        <input id="file-input" type="file" accept="images/*" />
+    </div>
+    <div id="resultNode">
+
+    </div>
+    <div class="btn btn-primary" id="upload">
+        上传
+    </div>
+    <div class="return-file" id="app">
+        <div v-for="(item,index) in faces" v-cloak>
+            人脸{{index}}:top:{{item.face_rectangle.top}};left:{{item.face_rectangle.left}};width:{{item.face_rectangle.width}};height:{{item.face_rectangle.height}};
+        </div>
+    </div>
+
+    <h1 class="title1">
+        2.人脸融合
+    </h1>
+    <h2>
+        2.1选择融合的脸和修改融合度
+    </h2>
+    <div id="app2">
+        <select v-model="selected">
+            <option v-bind:value="index" v-for="(item,index) in faces">人脸{{index}}</option>
+        </select>
+        融合比例（0-100）默认50:
+        <input type="text" placeholder="融合比例" v-model="merge_rate">
+    </div>
+    <h2>
+        2.2上传待合成人脸
+    </h2>
+    <div class="toFile">
+        <input id="file-input-upload" type="file" accept="images/*" />
+    </div>
+    <div id="resultNodeUpload">
+
+    </div>
+    <div class="btn btn-primary" id="upload-all">
+        合成
+    </div>
+
+    <div id="app3">
+        <img :src="src" v-cloak>
+    </div>
+
+    <script src="scripts/load-image.all.min.js"></script>
+    <script src="scripts/index.js"></script>
+    <script type="text/javascript">
+
+        // var xhr = new XMLHttpRequest();
+
+        // xhr.open('POST', '/api/wx/getsignature');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // xhr.onload = function () {
+        //     if (xhr.status === 200) {
+        //         // console.log(xhr.responseText);
+        //         var r = JSON.parse(xhr.responseText);
+
+        //         // 开始配置微信JS-SDK
+        //         wx.config({
+        //             debug: false,
+        //             appId: r.appId,
+        //             timestamp: r.timestamp,
+        //             nonceStr: r.nonceStr,
+        //             signature: r.signature,
+        //             jsApiList: [
+        //                 'checkJsApi',
+        //                 'onMenuShareTimeline',
+        //                 'onMenuShareAppMessage',
+        //                 'onMenuShareQQ',
+        //                 'onMenuShareWeibo',
+        //                 'hideMenuItems',
+        //                 'chooseImage'
+        //             ]
+        //         });
+
+        //         // 调用微信API
+        //         wx.ready(function () {
+        //             var sdata = {
+        //                 title: 'farvis',
+        //                 desc: 'A production house',
+        //                 link: 'https://farvis.cn/',
+        //                 imgUrl: 'https://farvis.cn/home/images/logo.png',
+        //             };
+        //             wx.onMenuShareTimeline(sdata);
+        //             wx.onMenuShareAppMessage(sdata);
+        //         });
+
+
+        //     } else if (xhr.status !== 200) {
+        //         console.log('Request failed.  Returned status of ' + xhr.status);
+        //     }
+        // };
+        // xhr.send('url=' + encodeURIComponent(location.href.split('#')[0]));
+    </script>
+</body>
+
+</html>
